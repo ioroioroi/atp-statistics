@@ -1,2 +1,0 @@
-[0;31m  ERROR[0m - [0;33m14/Dec/2015 21:06:38[0m ActiveRecord::StatementInvalid - SQLite3::SQLException: no such table: activities: SELECT "activities".* FROM "activities":
- /home/vimfactory/app/atp-statistics/vendor/bundle/ruby/2.1.0/gems/sqlite3-1.3.11/lib/sqlite3/database.rb:91:in `initialize'

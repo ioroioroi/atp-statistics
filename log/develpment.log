@@ -1,2 +1,0 @@
-[0;31m  ERROR[0m - [0;33m14/Dec/2015 21:06:08[0m ActiveRecord::AdapterNotSpecified - 'develpment' database is not configured. Available: [:development, :production, :test]:
- /home/vimfactory/app/atp-statistics/vendor/bundle/ruby/2.1.0/gems/activerecord-4.2.5/lib/active_record/connection_adapters/connection_specification.rb:248:in `resolve_symbol_connection'
