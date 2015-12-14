@@ -1,0 +1,26 @@
+# 検証対象から除外するファイル
+AllCops:
+  Exclude:
+    - 'Gemfile'
+    - 'config.ru'
+    - 'db/**/*'
+    - 'config/**/*'
+    - 'test/**/*'
+    - 'vendor/**/*'
+    - 'public/**/*'
+
+# 一行の最大文字数は100文字とする
+Metrics/LineLength:
+  Max: 100
+
+# 日本語コメントを認める
+Style/AsciiComments:
+  Enabled: false
+
+# メソッドの最大行数
+# 10 -> 20
+Metrics/MethodLength:
+  Max: 20
+
+Style/StringLiterals:
+  Enabled: false

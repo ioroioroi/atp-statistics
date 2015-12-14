@@ -1,0 +1,24 @@
+<table class="table">
+  <thead>
+    <tr>
+      <td>Tournament</td>
+      <td>Round</td>
+      <td>Player(Rank)</td>
+      <td>Opponet Player(Rank)</td>
+      <td>Score</td>
+      <td>W-L</td>
+    </tr>
+  </thead>
+  <tbody>
+  <% @activities.each do |activity| %>
+    <tr>
+      <td><%= activity.tournament_name %></td>
+      <td><%= activity.round %></td>
+      <td><%= activity.player_name %>(<%= activity.player_ranking %>)</td>
+      <td><%= activity.opponent_name %>(<%= activity.opponent_ranking %>)</td>
+      <td><%= activity.score %></td>
+      <td><%= activity.win_loss%></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

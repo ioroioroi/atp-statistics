@@ -1,0 +1,9 @@
+---
+:orm: activerecord
+:test: testunit
+:mock: mocha
+:script: none
+:renderer: none
+:stylesheet: sass
+:namespace: atp-statistics
+:migration_format: number
