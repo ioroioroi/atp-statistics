@@ -21,11 +21,11 @@ ActiveRecord::Base.configurations[:development] = {
 
 ActiveRecord::Base.configurations[:production] = {
   :adapter => 'postgresql',
-  :encoding => 'utf8'
-  :database  => <%= ENV['DB_DATABASE'] %>,
-  :username  => <%= ENV['DB_USERNAME'] %>,
-  :password  => <%= ENV['DB_PASSWORD'] %>,
-  :host      => <%= ENV['DB_HOST'] %>,
+  :encoding => 'utf8',
+  :database  => ENV['DB_DATABASE'],
+  :username  => ENV['DB_USERNAME'],
+  :password  => ENV['DB_PASSWORD'],
+  :host      => ENV['DB_HOST'],
   :port      => 5432
 }
 
