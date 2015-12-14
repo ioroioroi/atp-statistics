@@ -1,3 +1,4 @@
 db/*.db
 vendor/bundle
 public/components
+config/database.rb
