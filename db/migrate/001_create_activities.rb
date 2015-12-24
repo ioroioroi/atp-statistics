@@ -1,6 +1,7 @@
 class CreateActivities < ActiveRecord::Migration
   def self.up
     create_table :activities do |t|
+      t.string :year
       t.string :player_name
       t.string :player_ranking
       t.string :opponent_name

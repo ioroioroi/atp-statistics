@@ -14,6 +14,7 @@
 ActiveRecord::Schema.define(version: 1) do
 
   create_table "activities", force: :cascade do |t|
+    t.string   "year"
     t.string   "player_name"
     t.string   "player_ranking"
     t.string   "opponent_name"

@@ -43,6 +43,7 @@ gem 'padrino', '0.13.0'
 # Develop requirements
 gem 'rubocop', :group => 'test'
 gem 'pry', :group => 'development'
+gem 'pry-padrino', :group => 'development'
 gem 'rb-readline', :group => 'development'
 gem 'better_errors', :group => 'development'
 

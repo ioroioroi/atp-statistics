@@ -12,7 +12,7 @@
   <tbody>
   <% @activities.each do |activity| %>
     <tr>
-      <td><%= activity.tournament_name %></td>
+      <td><%= activity.tournament_name %>(<%= activity.year %>)</td>
       <td><%= activity.round %></td>
       <td><%= activity.player_name %>(<%= activity.player_ranking %>)</td>
       <td><%= activity.opponent_name %>(<%= activity.opponent_ranking %>)</td>

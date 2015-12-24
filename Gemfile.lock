@@ -89,6 +89,8 @@ GEM
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
+    pry-padrino (0.1.2)
+      pry (>= 0.8)
     rack (1.6.4)
     rack-protection (1.5.3)
       rack
@@ -141,6 +143,7 @@ DEPENDENCIES
   padrino (= 0.13.0)
   pg
   pry
+  pry-padrino
   rack-test
   rake
   rb-readline
