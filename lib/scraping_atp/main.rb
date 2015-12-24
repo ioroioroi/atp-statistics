@@ -3,10 +3,6 @@ require 'nokogiri'
 
 # Scrape data and insert db
 class Scraping
-  def get_activity_html(url)
-    open(url, 'r:UTF-8', &:read)
-  end
-
   def parse_activity_data(url)
     charset = nil
     html = open(url) do |f|
@@ -77,17 +73,18 @@ class Scraping
   def register_activity_data(activities)
     activities.each do |a|
       Activity.create(
-        :player_name => a[0],
-        :player_ranking => a[1],
-        :opponent_name => a[2],
-        :opponent_ranking => a[3],
-        :round => a[4],
-        :score => a[5],
-        :win_loss => a[6],
-        :tournament_name => a[7],
-        :tournament_place => a[8],
-        :tournament_date => a[9],
-        :tournament_surface => a[10]
+        :year => a[:year],
+        :player_name => a[:player_name],
+        :player_ranking => a[:player_rank],
+        :opponent_name => a[:opponent_name],
+        :opponent_ranking => a[:opponent_rank],
+        :round => a[:round],
+        :score => a[:score],
+        :win_loss => a[:win_loss],
+        :tournament_name => a[:tournament_name],
+        :tournament_place => a[:tournament_location],
+        :tournament_date => a[:tournament_date],
+        :tournament_surface => a[:tournament_surface]
       )
     end
   end
