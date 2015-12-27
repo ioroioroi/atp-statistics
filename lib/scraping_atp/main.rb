@@ -14,10 +14,10 @@ class Scraping
 
   def pickup_data(doc)
     result = []
+    player_name = doc.css("meta[property=\"pageTransitionTitle\"]").attr("content").value
     tournaments = doc.css(".activity-tournament-table")
     tournaments.each do |t|
       tournament = pickup_tournament_info(t)
-      player_name = "Rafael Nadal"
       player_rank = pickup_player_rank(tournament["caption"])
       record_table = t.css(".mega-table tbody tr")
       record_table.each do |r|
@@ -75,9 +75,9 @@ class Scraping
       Activity.create(
         :year => a[:year],
         :player_name => a[:player_name],
-        :player_ranking => a[:player_rank],
+        :player_rank => a[:player_rank],
         :opponent_name => a[:opponent_name],
-        :opponent_ranking => a[:opponent_rank],
+        :opponent_rank => a[:opponent_rank],
         :round => a[:round],
         :score => a[:score],
         :win_loss => a[:win_loss],

@@ -3,9 +3,9 @@ class CreateActivities < ActiveRecord::Migration
     create_table :activities do |t|
       t.string :year
       t.string :player_name
-      t.string :player_ranking
+      t.integer :player_rank
       t.string :opponent_name
-      t.string :opponent_ranking
+      t.integer :opponent_rank
       t.string :round
       t.string :score
       t.string :win_loss
