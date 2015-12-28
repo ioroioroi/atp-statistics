@@ -16,7 +16,7 @@ AtpStatistics::App.controllers :activity do
     erb :'activity/common'
   end
 
-  get :upper, :with => [:name, :year] do
+  get :higher, :with => [:name, :year] do
     player_name = convert_player_name_to_upper(params[:name])
     @activities = Activity
       .where("player_rank > opponent_rank")
