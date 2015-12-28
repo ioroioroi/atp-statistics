@@ -46,6 +46,8 @@ gem 'pry', :group => 'development'
 gem 'pry-padrino', :group => 'development'
 gem 'rb-readline', :group => 'development'
 gem 'better_errors', :group => 'development'
+gem 'guard', :group => 'development'
+gem 'guard-rubocop', :group => 'development'
 
 # Batch requirements
 gem 'nokogiri'

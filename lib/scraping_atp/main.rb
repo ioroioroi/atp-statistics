@@ -3,7 +3,7 @@ require 'nokogiri'
 
 # Scrape data and insert db
 class Scraping
-  def parse_activity_data(url)
+  def parse_html(url)
     charset = nil
     html = open(url) do |f|
       charset = f.charset
@@ -12,9 +12,9 @@ class Scraping
     return Nokogiri::HTML.parse(html, nil, charset)
   end
 
-  def pickup_data(doc)
+  def pickup_activity_data(doc)
     result = []
-    player_name = doc.css("meta[property=\"pageTransitionTitle\"]").attr("content").value
+    player_name = pickup_player_name(doc) 
     tournaments = doc.css(".activity-tournament-table")
     tournaments.each do |t|
       tournament = pickup_tournament_info(t)
@@ -42,6 +42,10 @@ class Scraping
     return result
   end
   
+  def pickuo_player_name(doc)
+    doc.css("meta[property=\"pageTransitionTitle\"]").attr("content").value
+  end
+
   def pickup_record(data)
     result = {}
     data.css("td").each_with_index do |td, n|

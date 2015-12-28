@@ -6,9 +6,5 @@ module AtpStatistics
     register Padrino::Helpers
 
     enable :sessions
-
-    get "/" do
-      "Hello World!"
-    end
   end
 end
