@@ -14,35 +14,40 @@ class Scraping
 
   def pickup_activity_data(doc)
     result = []
-    player_name = pickup_player_name(doc) 
+    player = {}
+    player['name'] = pickup_player_name(doc) 
     tournaments = doc.css(".activity-tournament-table")
     tournaments.each do |t|
       tournament = pickup_tournament_info(t)
-      player_rank = pickup_player_rank(tournament["caption"])
+      player['rank'] = pickup_player_rank(tournament["caption"])
       record_table = t.css(".mega-table tbody tr")
       record_table.each do |r|
         record = pickup_record(r)
-        hash = {
-          year: tournament["year"],
-          player_name: player_name,
-          player_rank: player_rank,
-          opponent_name: record["opponent_name"],
-          opponent_rank: record["opponent_rank"],
-          round: record["round"],
-          score: record["score"],
-          win_loss: record["win_loss"],
-          tournament_name: tournament["name"],
-          tournament_location: tournament["location"],
-          tournament_date: tournament["date"],
-          tournament_surface: tournament["surface"]
-        }
-        result.push(hash)
+        record_hash = create_record(record, player, tournament)
+        result.push(record_hash)
       end
     end
     return result
   end
+
+  def create_record(record, player, tournament)
+    hash = {
+      year: tournament["year"],
+      player_name: player["name"],
+      player_rank: player["rank"],
+      opponent_name: record["opponent_name"],
+      opponent_rank: record["opponent_rank"],
+      round: record["round"],
+      score: record["score"],
+      win_loss: record["win_loss"],
+      tournament_name: tournament["name"],
+      tournament_location: tournament["location"],
+      tournament_date: tournament["date"],
+      tournament_surface: tournament["surface"]
+    }
+  end
   
-  def pickuo_player_name(doc)
+  def pickup_player_name(doc)
     doc.css("meta[property=\"pageTransitionTitle\"]").attr("content").value
   end
 
