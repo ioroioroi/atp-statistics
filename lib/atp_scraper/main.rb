@@ -11,23 +11,32 @@ class Scraping
     end
     return Nokogiri::HTML.parse(html, nil, charset)
   end
-
+  
+  # nokogiriでparseされたactivityのページから
+  # 必要な情報を抜き出す
   def pickup_activity_data(doc)
     result = []
     player = {}
     player['name'] = pickup_player_name(doc) 
-    tournaments = doc.css(".activity-tournament-table")
-    tournaments.each do |t|
-      tournament = pickup_tournament_info(t)
+
+    search_tournaments_doc(doc).each do |tournament_doc|
+      tournament = pickup_tournament_info(tournament_doc)
       player['rank'] = pickup_player_rank(tournament["caption"])
-      record_table = t.css(".mega-table tbody tr")
-      record_table.each do |r|
-        record = pickup_record(r)
+      search_records_doc(tournament_doc).each do |record_doc|
+        record = pickup_record(record_doc)
         record_hash = create_record(record, player, tournament)
         result.push(record_hash)
       end
     end
     return result
+  end
+  
+  def search_tournaments_doc(doc)
+    doc.css(".activity-tournament-table")
+  end
+
+  def search_records_doc(tournament_doc)
+    tournament_doc.css(".mega-table tbody tr")
   end
 
   def create_record(record, player, tournament)
