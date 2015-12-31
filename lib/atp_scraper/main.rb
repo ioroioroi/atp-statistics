@@ -1,6 +1,18 @@
 require 'open-uri'
 require 'nokogiri'
 
+## ページ構成の命名
+# activity_doc(全体)
+#   tournament_doc
+#     record_doc
+#     record_doc
+#     record_doc
+#     record_doc
+#   tournament_doc
+#     record_doc
+#     record_doc
+#     record_doc
+
 # Scrape data and insert db
 class Scraping
   def parse_html(url)
@@ -14,12 +26,12 @@ class Scraping
   
   # nokogiriでparseされたactivityのページから
   # 必要な情報を抜き出す
-  def pickup_activity_data(doc)
+  def pickup_activity_data(activity_doc)
     result = []
     player = {}
-    player['name'] = pickup_player_name(doc) 
+    player['name'] = pickup_player_name(activity_doc) 
 
-    search_tournaments_doc(doc).each do |tournament_doc|
+    search_tournaments_doc(activity_doc).each do |tournament_doc|
       tournament = pickup_tournament_info(tournament_doc)
       player['rank'] = pickup_player_rank(tournament["caption"])
       search_records_doc(tournament_doc).each do |record_doc|
@@ -31,8 +43,8 @@ class Scraping
     return result
   end
   
-  def search_tournaments_doc(doc)
-    doc.css(".activity-tournament-table")
+  def search_tournaments_doc(activity_doc)
+    activity_doc.css(".activity-tournament-table")
   end
 
   def search_records_doc(tournament_doc)
@@ -56,13 +68,16 @@ class Scraping
     }
   end
   
-  def pickup_player_name(doc)
-    doc.css("meta[property=\"pageTransitionTitle\"]").attr("content").value
+  def pickup_player_name(activity_doc)
+    activity_doc.
+      css("meta[property=\"pageTransitionTitle\"]").
+      attr("content").
+      value
   end
 
-  def pickup_record(data)
+  def pickup_record(record_doc)
     result = {}
-    data.css("td").each_with_index do |td, n|
+    record_doc.css("td").each_with_index do |td, n|
       result["round"] = td.content.strip if n == 0
       result["opponent_rank"] = td.content.strip if n == 1
       result["opponent_name"] = td.content.strip if n == 2
@@ -72,19 +87,19 @@ class Scraping
     return result
   end
 
-  def pickup_tournament_info(data)
+  def pickup_tournament_info(tournament_doc)
     result = {}
-    result["name"] = data.css(".tourney-title").first.content.strip
-    result["location"] = data.css(".tourney-location").first.content.strip
-    result["date"] = data.css(".tourney-dates").first.content.strip
-    result["year"] = data.css(".tourney-dates").first.content.strip[0, 4]
-    result["caption"] = data.css(".activity-tournament-caption").first.content.strip
+    result["name"] = tournament_doc.css(".tourney-title").first.content.strip
+    result["location"] = tournament_doc.css(".tourney-location").first.content.strip
+    result["date"] = tournament_doc.css(".tourney-dates").first.content.strip
+    result["year"] = tournament_doc.css(".tourney-dates").first.content.strip[0, 4]
+    result["caption"] = tournament_doc.css(".activity-tournament-caption").first.content.strip
     result["surface"] = 'surface'
     return result
   end
 
-  def pickup_player_rank(caption)
-    rank = caption.match(/ATP Ranking:(.+), Prize/)
+  def pickup_player_rank(tournament_caption)
+    rank = tournament_caption.match(/ATP Ranking:(.+), Prize/)
     return rank[1].strip
   end
 
