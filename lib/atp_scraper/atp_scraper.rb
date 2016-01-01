@@ -14,13 +14,17 @@ require 'nokogiri'
 #     record_doc
 
 # Scrape data and insert db
-class Scraping
-  def parse_html(url)
+class AtpScraper
+  def get_html(url)
     charset = nil
     html = open(url) do |f|
       charset = f.charset
       f.read
     end
+    { html: html, charset: charset } 
+  end
+
+  def parse_html(html, charset)
     Nokogiri::HTML.parse(html, nil, charset)
   end
 

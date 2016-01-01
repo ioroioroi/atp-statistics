@@ -48,6 +48,7 @@ gem 'rb-readline', :group => 'development'
 gem 'better_errors', :group => 'development'
 gem 'guard', :group => 'development'
 gem 'guard-rubocop', :group => 'development'
+gem 'guard-minitest', :group => 'development'
 
 # Batch requirements
 gem 'nokogiri'
