@@ -104,7 +104,7 @@ class Scraping
       date: divide_tournament_date(tournament_date),
       year: tournament_date[0, 4],
       caption: pickup_text(tournament_doc, ".activity-tournament-caption"),
-      surface: 'surface'
+      surface: pickup_surface(tournament_doc)
     }
   end
 
@@ -122,5 +122,14 @@ class Scraping
 
   def pickup_text(doc, selector)
     doc.css(selector).first.content.strip
+  end
+
+  def pickup_surface(tournament_doc)
+    tournament_doc
+      .css(".tourney-details")[1]
+      .css(".item-details")
+      .first
+      .content
+      .gsub(/\t|\s/, "")
   end
 end
