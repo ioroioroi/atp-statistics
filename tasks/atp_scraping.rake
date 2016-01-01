@@ -4,7 +4,7 @@ namespace :atp_activity do
     scraping = Scraping.new
     doc = scraping.parse_html(args[:url])
     activities = scraping.pickup_activity_data(doc)
-    scraping.register_activity_data(activities)
+    puts activities
   end
 end
 

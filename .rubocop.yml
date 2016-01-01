@@ -2,12 +2,14 @@
 AllCops:
   Exclude:
     - 'Gemfile'
+    - 'Guardfile'
     - 'config.ru'
     - 'db/**/*'
     - 'config/**/*'
     - 'test/**/*'
     - 'vendor/**/*'
     - 'public/**/*'
+    - 'lib/connection_pool_management_middleware.rb'
 
 # 一行の最大文字数は100文字とする
 Metrics/LineLength:
@@ -24,3 +26,6 @@ Metrics/MethodLength:
 
 Style/StringLiterals:
   Enabled: false
+
+Style/MultilineOperationIndentation:
+  EnforcedStyle: indented
