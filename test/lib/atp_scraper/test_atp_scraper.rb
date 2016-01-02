@@ -23,9 +23,10 @@ class TestAtpScraper < Test::Unit::TestCase
   end
 
   def test_pickup_player_name
+    expect = 'Rafael Nadal'
     assert_equal(
       @@atp_scraper.pickup_player_name(@@activity_doc),
-      "Rafael Nadal"
+      expect
     )
   end
 
@@ -45,9 +46,10 @@ class TestAtpScraper < Test::Unit::TestCase
   end
 
   def test_pickup_pleyer_rank
+    expect = '2'
     assert_equal(
       @@atp_scraper.pickup_player_rank(@@tournament_info[:caption]),
-      "2"
+      expect
     )
   end
 
@@ -61,6 +63,23 @@ class TestAtpScraper < Test::Unit::TestCase
     }
     assert_equal(
       @@atp_scraper.pickup_record(@@record_doc),
+      expect
+    )
+  end
+
+  def test_pickup_surface
+    expect = 'OutdoorGrass'
+    assert_equal(
+      @@atp_scraper.pickup_surface(@@tournament_doc),
+      expect
+    )
+  end
+
+  def test_divide_tournament_date
+    actual = '2011.01.03 - 2011.01.08'
+    expect = { start: '2011.01.03', end: '2011.01.08' }
+    assert_equal(
+      @@atp_scraper.divide_tournament_date(actual),
       expect
     )
   end
