@@ -21,7 +21,7 @@ class AtpScraper
       charset = f.charset
       f.read
     end
-    { html: html, charset: charset } 
+    { html: html, charset: charset }
   end
 
   def parse_html(html, charset)
@@ -44,7 +44,7 @@ class AtpScraper
         result.push(record_hash)
       end
     end
-    return result
+    result
   end
 
   def search_tournaments_doc(activity_doc)
@@ -97,7 +97,7 @@ class AtpScraper
         result[:score] = record_content
       end
     end
-    return result
+    result
   end
 
   def pickup_tournament_info(tournament_doc)
