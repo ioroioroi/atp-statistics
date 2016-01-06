@@ -11,7 +11,7 @@
   </thead>
   <tbody>
   <% @activities.each do |activity| %>
-    <tr>
+    <tr class="<%= 'success' if activity.win_loss == 'W' %>">
       <td><%= activity.tournament_name %>(<%= activity.year %>)</td>
       <td><%= activity.round %></td>
       <td><%= activity.player_name %> (<%= activity.player_rank %>)</td>
