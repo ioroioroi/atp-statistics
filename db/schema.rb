@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 1) do
+ActiveRecord::Schema.define(version: 2) do
 
   create_table "activities", force: :cascade do |t|
     t.string   "year"
@@ -26,6 +26,13 @@ ActiveRecord::Schema.define(version: 1) do
     t.string   "tournament_place"
     t.string   "tournament_date"
     t.string   "tournament_surface"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "players", force: :cascade do |t|
+    t.string   "name"
+    t.string   "url_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
