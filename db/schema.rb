@@ -24,11 +24,14 @@ ActiveRecord::Schema.define(version: 2) do
     t.string   "win_loss"
     t.string   "tournament_name"
     t.string   "tournament_place"
-    t.string   "tournament_date"
+    t.date     "tournament_start_date"
+    t.date     "tournament_end_date"
     t.string   "tournament_surface"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "activities", ["player_name", "opponent_name", "round", "tournament_name"], name: "activities_uniq_index", unique: true
 
   create_table "players", force: :cascade do |t|
     t.string   "name"
