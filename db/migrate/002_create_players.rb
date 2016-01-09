@@ -2,7 +2,7 @@ class CreatePlayers < ActiveRecord::Migration
   def self.up
     create_table :players do |t|
       t.string :name
-      t.string :url_id
+      t.string :player_url_id
       t.timestamps
     end
   end

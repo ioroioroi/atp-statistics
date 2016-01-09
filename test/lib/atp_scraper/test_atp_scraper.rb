@@ -7,8 +7,8 @@ class TestAtpScraper < Test::Unit::TestCase
   @@html_charset = "utf-8"
 
   def setup
-    @@atp_scraper = AtpScraper.new
-    @@activity_doc = @@atp_scraper.parse_html(@@html, @@html_charset)
+    @@atp_scraper = AtpScraper::Activity.new
+    @@activity_doc = AtpScraper::Get.parse_html(@@html, @@html_charset)
     
     # 2012年のWimbledonのデータ
     @@tournament_doc = @@atp_scraper.search_tournaments_doc(@@activity_doc).first
@@ -16,10 +16,6 @@ class TestAtpScraper < Test::Unit::TestCase
 
     # 2012年のWimbledonの対Rosolのデータ
     @@record_doc = @@atp_scraper.search_records_doc(@@tournament_doc).first
-  end
-
-  def test_parse_html
-    assert_not_nil(@@atp_scraper.parse_html(@@html, @@html_charset))
   end
 
   def test_pickup_player_name

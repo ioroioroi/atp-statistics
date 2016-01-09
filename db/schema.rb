@@ -35,7 +35,7 @@ ActiveRecord::Schema.define(version: 2) do
 
   create_table "players", force: :cascade do |t|
     t.string   "name"
-    t.string   "url_id"
+    t.string   "player_url_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
