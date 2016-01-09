@@ -21,9 +21,11 @@ module AtpScraper
     end
 
     def pickup_player_data(player_doc)
+      url = pickup_player_url(player_doc)
       {
         name: pickup_player_name(player_doc),
-        player_url_id: get_player_id(pickup_player_url(player_doc))
+        url_name: get_url_name(url),
+        url_id: get_url_id(url)
       }
     end
 
@@ -35,7 +37,11 @@ module AtpScraper
       player_doc.css(".player-cell a").attr("href").value
     end
 
-    def get_player_id(url)
+    def get_url_name(url)
+      url.split("/")[3] 
+    end
+
+    def get_url_id(url)
       url.split("/")[4] 
     end
   end
