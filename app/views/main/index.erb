@@ -20,3 +20,10 @@
   <li><a href="/activity/higher/kei_nishikori/2014">2014 vs Higher ranking player</a></li>
   <li><a href="/activity/lower/kei_nishikori/2014">2014 Beaten by lower ranking player</a></li>
 </ul>
+
+<h1>Players</h1>
+<ul>
+  <% @players.each do |player| %>
+    <li><%= player.name %></li>
+  <% end %>
+</ul>
