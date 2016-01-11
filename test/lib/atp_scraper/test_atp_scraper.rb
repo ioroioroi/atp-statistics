@@ -1,27 +1,27 @@
 require "test/unit"
 
 class TestAtpScraper < Test::Unit::TestCase
-  # サンプルは2012年のNadalのActivity
-  # http://www.atpworldtour.com/players/rafael-nadal/n409/player-activity?year=2012
-  @@html = File.open('test/lib/atp_scraper/sample.html').read
-  @@html_charset = "utf-8"
 
   def setup
-    @@atp_scraper = AtpScraper::Activity.new
-    @@activity_doc = AtpScraper::Get.parse_html(@@html, @@html_charset)
+    # サンプルは2012年のNadalのActivity
+    # http://www.atpworldtour.com/players/rafael-nadal/n409/player-activity?year=2012
+    @html = File.open('test/lib/atp_scraper/sample.html').read
+    @html_charset = "utf-8"
+    @atp_scraper = AtpScraper::Activity.new
+    @activity_doc = AtpScraper::Get.parse_html(@html, @html_charset)
     
     # 2012年のWimbledonのデータ
-    @@tournament_doc = @@atp_scraper.search_tournaments_doc(@@activity_doc).first
-    @@tournament_info = @@atp_scraper.pickup_tournament_info(@@tournament_doc)
+    @tournament_doc = @atp_scraper.search_tournaments_doc(@activity_doc).first
+    @tournament_info = @atp_scraper.pickup_tournament_info(@tournament_doc)
 
     # 2012年のWimbledonの対Rosolのデータ
-    @@record_doc = @@atp_scraper.search_records_doc(@@tournament_doc).first
+    @record_doc = @atp_scraper.search_records_doc(@tournament_doc).first
   end
 
   def test_pickup_player_name
     expect = 'Rafael Nadal'
     assert_equal(
-      @@atp_scraper.pickup_player_name(@@activity_doc),
+      @atp_scraper.pickup_player_name(@activity_doc),
       expect
     )
   end
@@ -36,7 +36,7 @@ class TestAtpScraper < Test::Unit::TestCase
       surface: 'OutdoorGrass'
     }
     assert_equal(
-      @@atp_scraper.pickup_tournament_info(@@tournament_doc),
+      @atp_scraper.pickup_tournament_info(@tournament_doc),
       expect
     )
   end
@@ -44,7 +44,7 @@ class TestAtpScraper < Test::Unit::TestCase
   def test_pickup_pleyer_rank
     expect = '2'
     assert_equal(
-      @@atp_scraper.pickup_player_rank(@@tournament_info[:caption]),
+      @atp_scraper.pickup_player_rank(@tournament_info[:caption]),
       expect
     )
   end
@@ -58,7 +58,7 @@ class TestAtpScraper < Test::Unit::TestCase
       score: '769 46 46 62 46'
     }
     assert_equal(
-      @@atp_scraper.pickup_record(@@record_doc),
+      @atp_scraper.pickup_record(@record_doc),
       expect
     )
   end
@@ -66,7 +66,7 @@ class TestAtpScraper < Test::Unit::TestCase
   def test_pickup_surface
     expect = 'OutdoorGrass'
     assert_equal(
-      @@atp_scraper.pickup_surface(@@tournament_doc),
+      @atp_scraper.pickup_surface(@tournament_doc),
       expect
     )
   end
@@ -75,7 +75,7 @@ class TestAtpScraper < Test::Unit::TestCase
     actual = '2011.01.03 - 2011.01.08'
     expect = { start: '2011.01.03', end: '2011.01.08' }
     assert_equal(
-      @@atp_scraper.divide_tournament_date(actual),
+      @atp_scraper.divide_tournament_date(actual),
       expect
     )
   end
