@@ -33,15 +33,15 @@ module AtpScraper
       end
       result
     end
-  
+
     def search_tournaments_doc(activity_doc)
       activity_doc.css(".activity-tournament-table")
     end
-  
+
     def search_records_doc(tournament_doc)
       tournament_doc.css(".mega-table tbody tr")
     end
-  
+
     def create_record(record, player, tournament)
       {
         year: tournament[:year],
@@ -59,14 +59,14 @@ module AtpScraper
         tournament_surface: tournament[:surface]
       }
     end
-  
+
     def pickup_player_name(activity_doc)
       activity_doc
         .css("meta[property=\"pageTransitionTitle\"]")
         .attr("content")
         .value
     end
-  
+
     def pickup_record(record_doc)
       result = {}
       record_doc.css("td").each_with_index do |td, n|
@@ -86,7 +86,7 @@ module AtpScraper
       end
       result
     end
-  
+
     def pickup_tournament_info(tournament_doc)
       tournament_date = pickup_text(tournament_doc, ".tourney-dates")
       {
@@ -98,23 +98,23 @@ module AtpScraper
         surface: pickup_surface(tournament_doc)
       }
     end
-  
+
     def pickup_player_rank(tournament_caption)
       rank = tournament_caption.match(/ATP Ranking:(.+), Prize/)
       rank[1].strip
     end
-  
+
     # Before: String "2011.01.03 - 2011.01.08"
     # After:  Hash { start: 2011.01.03, end: 2011.01.08 }
     def divide_tournament_date(date)
       date = date.split('-').map(&:strip)
       { start: date[0], end: date[1] }
     end
-  
+
     def pickup_text(doc, selector)
       doc.css(selector).first.content.strip
     end
-  
+
     def pickup_surface(tournament_doc)
       tournament_doc
         .css(".tourney-details")[1]

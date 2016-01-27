@@ -1,5 +1,6 @@
 require 'nokogiri'
 module AtpScraper
+  # Playerに関するクラス
   class Player
     
     ## ランキングページの構成
@@ -38,11 +39,11 @@ module AtpScraper
     end
 
     def get_url_name(url)
-      url.split("/")[3] 
+      url.split("/")[3]
     end
 
     def get_url_id(url)
-      url.split("/")[4] 
+      url.split("/")[4]
     end
   end
 end
