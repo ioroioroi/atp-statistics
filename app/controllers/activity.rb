@@ -1,5 +1,7 @@
 AtpStatistics::App.controllers :activity do
   get :index, :with => [:name, :year] do
+    @year = params[:year]
+    @player_url_name = params[:name]
     @player_name = Player.convert_name_from_url_name(params[:name])
     @activities = Activity
       .where("player_name = ?", @player_name)
@@ -10,6 +12,8 @@ AtpStatistics::App.controllers :activity do
   end
 
   get :vstop10, :with => [:name, :year] do
+    @year = params[:year]
+    @player_url_name = params[:name]
     @player_name = Player.convert_name_from_url_name(params[:name])
     @activities = Activity
       .where("opponent_rank <= ?", 10)
@@ -21,6 +25,8 @@ AtpStatistics::App.controllers :activity do
   end
 
   get :higher, :with => [:name, :year] do
+    @year = params[:year]
+    @player_url_name = params[:name]
     @player_name = Player.convert_name_from_url_name(params[:name])
     @activities = Activity
       .where("player_rank > opponent_rank")

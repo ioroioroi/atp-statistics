@@ -1,8 +1,9 @@
 <h1 class="page-header"><%= @player_name %> Activity</h1>
-<ul class="nav nav-pills nav-justified">
-  <li role="presentation" class="active"><a href="#">ALL</a></li>
-  <li role="presentation"><a href="#">Higher</a></li>
-  <li role="presentation"><a href="#">Lower</a></li>
+<ul>
+  <li><a href="/activity/<%= @player_url_name %>/<%= @year %>">ALL</a></li>
+  <li><a href="/activity/vstop10/<%= @player_url_name %>/<%= @year %>">VS Top10</a></li>
+  <li><a href="/activity/higher/<%= @player_url_name %>/<%= @year %>">Higher</a></li>
+  <li><a href="/activity/lower/<%= @player_url_name %>/<%= @year %>">Lower</a></li>
 </ul>
 <table class="table">
   <thead>
