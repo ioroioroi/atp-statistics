@@ -37,7 +37,7 @@ namespace :atp_statistics do
     end
   end
 
-  namespace :atp_player do
+  namespace :player do
     desc "Get player list(TOP100) and db register"
     task :get, ['url'] => :environment do |task, args|
       scraping = AtpScraper::Player.new
